@@ -1,0 +1,17 @@
+server:
+  port: 8180
+      
+logging:
+  level:
+    org.springframework.web: ERROR
+    onlinejudge: DEBUG
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    
+path:
+  submitRootPath: D:/hle56/test/allSubmit
+  dataRootPath: D:/hle56/test/data

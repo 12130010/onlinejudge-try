@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/chatbox/chatbox.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="/socket/sockjs.min.js"></script>
+    <script src="/socket/stomp.min.js"></script>
+    <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
+	<script src="/chatbox/chatbox.js"></script>
+	<script src="/chatbox/appchatbox.js"></script>
+</head>
+<body>
+	<div class="container text-center">
+		<div class="row">
+			<div class="round hollow text-center">
+			<a href="#" id="addClass"><span class="glyphicon glyphicon-comment"></span> Open chat box</a>
+			</div>
+		</div>
+	</div>
+	<div class="popup-box chat-popup" id="qnimate">
+		  <div class="popup-head">
+			<div class="popup-head-left pull-left">Online Judge Community</div>
+				  <div class="popup-head-right pull-right">
+				  	<label>
+					    <input id="ringtone" type="checkbox" value="true" checked> Ringtone
+					 </label>
+				  	<label>
+					    <input id="autoScroll" type="checkbox" value="true" checked> Auto Scroll
+					 </label>
+					<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
+				  </div>
+		  </div>
+			<div id="popup-messages" class="popup-messages">
+				<div id="direct-chat-messages" class="direct-chat-messages">
+					<div id="direct-chat-messages-content">
+						<!-- Message. Default to the left -->
+						<!-- <div class="direct-chat-msg doted-border">
+						  <div class="direct-chat-info clearfix">
+							<span class="direct-chat-name pull-left">Osahan</span>
+						  </div>
+						  /.direct-chat-info
+						  <img alt="message user image" src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg" class="direct-chat-img">/.direct-chat-img
+						  
+						  <div class="direct-chat-text">
+							Hey bro, how’s everything going ?
+						  </div>
+						  <div class="direct-chat-info clearfix">
+							<span class="direct-chat-timestamp pull-right">3.36 PM</span>
+						  </div>
+						</div> -->
+						<!-- /.direct-chat-msg -->
+					</div>
+				 </div>
+			</div>
+			<div class="popup-messages-footer">
+			<input id="message" placeholder="Type a message..." name="message" style="width:100%"/>
+			<div class="btn-footer">
+				<button id="btnLike" class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+			</div>
+			</div>
+	  </div>
+</body>
