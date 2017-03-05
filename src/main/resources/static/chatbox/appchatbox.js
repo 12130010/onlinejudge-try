@@ -17,12 +17,18 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/chatboxs');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (response) {
+        stompClient.subscribe('/app/firstJoin', function (response) {
+        	var listMessage = JSON.parse(response.body);
+        	$.each(listMessage, function( index, message ) {
+        		showGreeting(message.message, message.name, message.shortName,message.time);
+        	});
+        });
+        stompClient.subscribe('/topic/chatforward', function (response) {
         	var message = JSON.parse(response.body);
             showGreeting(message.message, message.name, message.shortName,message.time);
         });
@@ -38,7 +44,9 @@ function disconnect() {
 }
 
 function sendMessage(message) {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': name, "message" : message, "time": time, "shortName": shortName}));
+	var date = new Date();
+    time = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() +':' +	date.getMinutes();
+    stompClient.send("/app/chat", {}, JSON.stringify({'name': name, "message" : message, "time": time, "shortName": shortName}));
 }
 
 function showGreeting(message, name, shortName, time) {
@@ -71,5 +79,6 @@ $(function () {
     
     autoScroll = $('#autoScroll');
     ringtone = $('#ringtone');
+    
 });
 

@@ -1,5 +1,5 @@
 server:
-  port: 8180
+  port: 8080
       
 logging:
   level:
@@ -15,3 +15,6 @@ spring:
 path:
   submitRootPath: D:/hle56/test/allSubmit
   dataRootPath: D:/hle56/test/data
+  messageChatBox: D:/hle56/test/chatbox
+chatbox:
+  maxMessage: 3

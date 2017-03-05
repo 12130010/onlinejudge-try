@@ -1,8 +1,10 @@
 package onlinejudge.judgehost.model;
 
-public class Message {
+import java.io.Serializable;
 
-    private String name,shortName, message, time;
+public class Message implements Serializable{
+	private static final long serialVersionUID = -2375508004207614729L;
+	private String name,shortName, message, time;
 
     public Message() {
     }
