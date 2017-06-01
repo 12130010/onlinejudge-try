@@ -11,7 +11,7 @@ body
     display: none;
     height: 600px;
     position: fixed;
-    right: 70px;
+    right: 0px;
     width: 500px;
     font-family: 'Open Sans', sans-serif;
 }

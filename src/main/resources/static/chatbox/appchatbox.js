@@ -17,7 +17,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/chatboxs');
+    var socket = new SockJS('/chatboxapp/chatboxs');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -60,7 +60,7 @@ function showGreeting(message, name, shortName, time) {
 jQuery.fn.scrollTo = function(elem, speed) { 
     $(this).animate({
         scrollTop: $(elem).height()
-    }, speed == undefined ? 1000 : speed); 
+    }, speed == undefined ? 100 : speed); 
     return this; 
 };
 

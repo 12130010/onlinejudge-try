@@ -32,6 +32,8 @@ public class JudgeHostController {
 	public String submitRootPath;;
 	@Value("${path.dataRootPath}")
 	public String dataRootPath ;
+	@Value("${path.resultRootPath}")
+	public String resultRootPath ;
 	
 	Log logger = LogFactory.getLog(getClass());
 
@@ -40,9 +42,9 @@ public class JudgeHostController {
 	
 	@Autowired
 	ProblemService problemService;
-
 	@RequestMapping(value = { "/", "/home" })
-	public @ResponseBody String hello() {
+	public @ResponseBody String hello() throws IOException {
+		logger.debug("Wellcome");
 		return "Wellcome to My Judge Host!";
 	}
 
@@ -51,6 +53,7 @@ public class JudgeHostController {
 		if (problemId == null || problemId.equals(""))
 			return "redirect:/problem";
 		model.addAttribute("problemId", problemId);
+		model.addAttribute("problemPath", "listProblem/"+problemId +".pdf");
 		return "submit";
 	}
 
@@ -63,6 +66,10 @@ public class JudgeHostController {
 		String messageAccepted = "";
 		String messageWrong = "";
 		String messageError = "";
+		
+		String record = "";
+		HttpSession session = request.getSession();
+		
 		if (problemId == null || problemId.isEmpty()) {
 			message = "Please input Product ID.\n";
 		}
@@ -94,7 +101,9 @@ public class JudgeHostController {
 
 			boolean isCompileSuccess = myCompiler.isCompileSuccess();
 			logger.debug("Compiler'status is: " + isCompileSuccess);
-
+			
+			record = idSubmit + "\t" + session.getAttribute("userId") +"\t" + session.getAttribute("userName") + "\t" + problemId;
+			
 			if (isCompileSuccess) {
 
 				final boolean[] isJudgeComplete = new boolean[] { false };
@@ -114,21 +123,28 @@ public class JudgeHostController {
 				// message = myJudge.getInformation();
 				if (myJudge.isCorrect()) {
 					messageAccepted = "Accepted.";
+					record += "\tAccepted";
 				} else if (myJudge.isIncorrect()) {
 					messageWrong = "Wrong answer.";
+					record += "\tWrong answer.";
 				} else if (myJudge.isError()) {
-					messageError = "There are error when run your code. Please check again!";
+					messageError = "There are error when run your code. Please check again!\nError is: " + myJudge.getErrorMessage();
+					record += "\tError\t" + myJudge.getErrorMessage();
 				}
 				logger.debug("Judge host'information is: " + myJudge.getInformation());
 			} else {
 				message = "Compiler fail";
+				record += "\tCompiler fail\t";
 			}
 		}
+		
+		FileUtils.writeStringToFile(new File(resultRootPath +"/result.txt"), record+"\n", true);
 		model.addAttribute("message", message);
 		model.addAttribute("messageAccepted", messageAccepted);
 		model.addAttribute("messageWrong", messageWrong);
 		model.addAttribute("messageError", messageError);
 		model.addAttribute("problemId", problemId);
+		model.addAttribute("problemPath", "listProblem/"+problemId +".pdf");
 		return "submit";
 	}
 

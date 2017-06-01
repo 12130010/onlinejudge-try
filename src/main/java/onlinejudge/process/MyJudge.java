@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -21,6 +22,7 @@ public class MyJudge {
 	Log logger = LogFactory.getLog(getClass());
 	public static String NEW_LINE = "\n";
 	boolean isError = false;
+	String errorMessage = "";
 	boolean isRunSuccess = false;
 	boolean isTimeOut = false;
 	boolean isCorrect = false;
@@ -109,6 +111,7 @@ public class MyJudge {
 				try {
 					while (!isError && !isRunSuccess && (s = br.readLine()) != null) {
 						System.err.println(s);
+						errorMessage = s;
 						isError = true;
 					}
 				} catch (IOException e) {
@@ -161,6 +164,7 @@ public class MyJudge {
 				try {
 					brOutputData = new BufferedReader(
 							new InputStreamReader(new FileInputStream(pathFileData + File.separator + outputDataFile)));
+					FileUtils.writeStringToFile(new File(pathFileJava + File.separator +"anwsert.txt"),outputFromProcess.toString(), true);
 					brOutputProcess = new BufferedReader(
 							new InputStreamReader(new ByteArrayInputStream(outputFromProcess.toString().getBytes())));
 					String outputData = "";
@@ -242,6 +246,10 @@ public class MyJudge {
 	public void setIncorrect(boolean isIncorrect) {
 		this.isIncorrect = isIncorrect;
 	}
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+	
 //	public static void main(String[] args) throws IOException, InterruptedException {
 //		String pathFileJava = "D:" + File.separator + "hle56" + File.separator + "test" + File.separator + "12130010";
 //		String pathRootDirectory = "D:" + File.separator + "hle56" + File.separator + "test" + File.separator + "P001";

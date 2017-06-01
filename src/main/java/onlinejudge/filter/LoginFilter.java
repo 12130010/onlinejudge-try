@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = "/*")
 public class LoginFilter implements Filter{
-
+	static final String ORIGIN = "Origin";
 	@Override
 	public void destroy() {
 		
@@ -24,8 +24,28 @@ public class LoginFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
+		
+//		if (request.getHeader(ORIGIN) == null || request.getHeader(ORIGIN).equals("null")) {
+	           response.setHeader("Access-Control-Allow-Origin", " http://localhost:4000");//* or origin as u prefer
+	           response.setHeader("Access-Control-Allow-Credentials", "true");
+	           response.setHeader("Access-Control-Allow-Headers",
+	           request.getHeader("Access-Control-Request-Headers"));
+//        }
+        if (request.getMethod().equals("OPTIONS")) {
+            try {
+                response.getWriter().print("OK");
+                response.getWriter().flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+       }
+		
 		String path = ((HttpServletRequest) req).getRequestURI();
-		if(path.startsWith("/login")){
+		if(path.startsWith("/login")
+		|| path.startsWith("/arduino")
+		|| path.contains("/chat")){
 			chain.doFilter(req, res);
 			return;
 		}

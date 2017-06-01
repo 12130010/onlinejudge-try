@@ -1,9 +1,10 @@
 server:
-  port: 8080
+  port: 8180
+  context-path: /chatboxapp
       
 logging:
   level:
-    org.springframework.web: ERROR
+    org.springframework.web: DEBUG
     onlinejudge: DEBUG
     
 spring:
@@ -13,8 +14,9 @@ spring:
       suffix: .jsp
     
 path:
-  submitRootPath: D:/hle56/test/allSubmit
-  dataRootPath: D:/hle56/test/data
-  messageChatBox: D:/hle56/test/chatbox
+  submitRootPath: C:\Users\oONhuocQuyOo\Desktop\tmp\data\allSubmit
+  dataRootPath: C:\Users\oONhuocQuyOo\Desktop\tmp\data\input-output
+  resultRootPath: C:\Users\oONhuocQuyOo\Desktop\tmp\data\result
+  messageChatBox: C:\Users\oONhuocQuyOo\Desktop\tmp\data\chatbox
 chatbox:
   maxMessage: 3

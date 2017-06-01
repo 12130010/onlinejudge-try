@@ -3,14 +3,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/chatbox/chatbox.css"/>
+	<link rel="stylesheet" href="chatbox/chatbox.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="/socket/sockjs.min.js"></script>
-    <script src="/socket/stomp.min.js"></script>
+	<script src="socket/sockjs.min.js"></script>
+    <script src="socket/stomp.min.js"></script>
     <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
-	<script src="/chatbox/chatbox.js"></script>
-	<script src="/chatbox/appchatbox.js"></script>
+	<script src="chatbox/chatbox.js"></script>
+	<script src="chatbox/appchatbox.js"></script>
 </head>
 <body>
 	<div class="container text-center">
@@ -20,7 +20,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="popup-box chat-popup" id="qnimate">
+	<div class="popup-box chat-popup popup-box-on" id="qnimate">
 		  <div class="popup-head">
 			<div class="popup-head-left pull-left">Online Judge Community</div>
 				  <div class="popup-head-right pull-right">
@@ -30,7 +30,7 @@
 				  	<label>
 					    <input id="autoScroll" type="checkbox" value="true" checked> Auto Scroll
 					 </label>
-					<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
+<!-- 					<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button> -->
 				  </div>
 		  </div>
 			<div id="popup-messages" class="popup-messages">
